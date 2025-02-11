@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ульяночка я тебя люблю сильно</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #000000;
+      font-family: 'Courgette', cursive;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 2.5rem;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #929292;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 10px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+    }
+
+    #love-message {
+      color: #ffffff;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+  <script>
+    let clickCount = 0;
+
+    const messages = [
+      "Ты серьёзно?",
+      "Я тебе не верю!",
+      "Подумай ещё раз!",
+      "Ну ладно, может быть...",
+      "Я тебя тоже очень люблю <3"
+    ];
+
+    function handleYesClick(button) {
+      if (clickCount < messages.length) {
+        button.textContent = messages[clickCount];
+        button.style.transform = `scale(${1 + clickCount * 0.1})`;
+        clickCount++;
+        if (clickCount === messages.length) {
+          window.location.href = "final.html";
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <video autoplay muted loop>
+    <source src="https://www.videvo.net/videvo_files/converted/2016_03/preview/160315_Love_04_1080p.mp4" type="video/mp4">
+  </video>
+  
+  <h1>Ты правда любишь меня?</h1>
+
+  <div class="button-container">
+    <button onclick="handleYesClick(this)">Да</button>
+    <button>Нет</button>
+  </div>
+
+  <div id="love-message">Я тебя тоже очень люблю <3</div>
+</body>
+</html>
