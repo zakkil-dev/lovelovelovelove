@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Любовь</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: black;
+      font-family: 'Courgette', cursive;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      color: white;
+      position: relative;
+      animation: glitch 0.2s infinite;
+    }
+
+    @keyframes glitch {
+      0% {
+        text-shadow: 2px 2px white, -2px -2px black;
+        transform: translate(0, 0);
+      }
+      10% {
+        text-shadow: -3px 3px white, 3px -3px black;
+        transform: translate(5px, -3px) skew(0.7deg);
+      }
+      20% {
+        text-shadow: -5px 5px white, 5px -5px black;
+        transform: translate(-7px, 3px) skew(-0.9deg);
+      }
+      40% {
+        text-shadow: 5px -5px white, -5px 5px black;
+        transform: translate(8px, -2px) skew(1.1deg);
+      }
+      100% {
+        text-shadow: 2px 2px white, -2px -2px black;
+        transform: translate(0, 0);
+      }
+    }
+
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: white;
+      transform: rotate(45deg);
+      animation: float 1.8s linear infinite;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .heart:before {
+      top: -7.5px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: -7.5px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes explosion {
+      0% {
+        opacity: 1;
+        transform: scale(0.5) translate(0, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.5) translateZ(500px);
+      }
+    }
+
+    .exploding-heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      transform: rotate(45deg);
+      animation: explosion 1.5s ease-out forwards;
+    }
+
+    .exploding-heart:before,
+    .exploding-heart:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .exploding-heart:before {
+      top: -10px;
+      left: 0;
+    }
+
+    .exploding-heart:after {
+      left: -10px;
+      top: 0;
+    }
+  </style>
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      document.body.appendChild(heart);
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 1 + 1.5 + 's';
+
+      setTimeout(() => {
+        heart.remove();
+      }, 3000);
+    }
+
+    function explodeHearts() {
+      for (let i = 0; i < 50; i++) {
+        const explodingHeart = document.createElement('div');
+        explodingHeart.classList.add('exploding-heart');
+        document.body.appendChild(explodingHeart);
+
+        explodingHeart.style.left = window.innerWidth / 2 + 'px';
+        explodingHeart.style.top = window.innerHeight / 2 + 'px';
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 200 + 100;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+
+        explodingHeart.style.transform = `translate(${x}px, ${y}px) rotate(45deg)`;
+
+        setTimeout(() => {
+          explodingHeart.remove();
+        }, 1500);
+      }
+    }
+
+    window.onload = function() {
+      explodeHearts();
+    };
+
+    setInterval(createHeart, 200);
+  </script>
+</head>
+<body>
+  <h1>Я тебя тоже люблю <3</h1>
+  <audio autoplay loop>
+    <source src="otravlen.mp4" type="audio/mpeg">
+    Ваш браузер не поддерживает воспроизведение музыки.
+  </audio>
+</body>
+</html>
